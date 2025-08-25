@@ -84,4 +84,3 @@ try {
     echo json_encode(['error' => 'Erro interno no servidor.'], JSON_UNESCAPED_UNICODE);
 }
 
-#comentario
