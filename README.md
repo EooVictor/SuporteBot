@@ -73,7 +73,7 @@ Toda a base de dados é fornecida ao GPT em formato de **texto estruturado**, pe
 **Victor Raphael**
 💼 Técnico de Suporte na [Radio Memory](https://www.radiomemory.com.br/)
 🎓 Engenharia de Software - UNA
-🚀 Entusiasta de **IA, automação e backend**
+🚀 Entusiast de **IA, automação e backend**
 
 [![LinkedIn](https://img.shields.io/badge/-Victor_Raphael-0077B5?style=for-the-badge\&logo=linkedin\&logoColor=white)](https://www.linkedin.com/in/dev-victor-raphael)
 [![GitHub](https://img.shields.io/badge/-EooVictor-181717?style=for-the-badge\&logo=github\&logoColor=white)](https://github.com/EooVictor)
