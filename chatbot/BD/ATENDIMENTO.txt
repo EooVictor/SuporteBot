@@ -1,0 +1,260 @@
+## Dashboard do Assinante
+
+**Identificadores:**
+Dashboard, Assinante, Atendimento, Semáforo, Jornada do Cliente
+
+**Tratativa (Passo a Passo):**
+
+1. Acesse o site do dashboard pelo link: **Dashboard do Assinante**.
+2. Faça login com a conta Google da Radio Memory.
+3. Utilize as funcionalidades disponíveis.
+
+**Funcionalidades:**
+
+* Pesquisar e consultar registros de clientes pelo ADM.
+* Registrar ocorrências e visualizar históricos de atendimento.
+* Verificar pendências financeiras através do Semáforo.
+* Consultar login e senha de publicação do domínio do cliente.
+
+**Semáforo:**
+
+* **Verde:** Cliente apto para atendimento.
+* **Amarelo:** Contrato inativo ou sem suporte, aparece como “cadastro inativo”. Em caso de dúvida, confirmar no grupo de suporte.
+* **Vermelho:** Cliente com pendência financeira, deve ser transferido ao setor financeiro.
+
+**Jornada do Cliente:**
+
+* Exibe status atual do cliente na empresa.
+* Mostra agendamentos pendentes de treinamento, problemas recorrentes e histórico de atendimento.
+
+**Observações:**
+
+* O Dashboard do Assinante é obrigatório para registrar atendimentos e acompanhar solicitações dos clientes.
+* Deve ser utilizado sempre para manter o histórico atualizado e organizado.
+
+------
+
+## Redirecionamento para SystemTec
+
+**Identificadores:**
+Redirecionamento, Gestão Empresarial, SystemTec, Blip Desk, Dashboard
+
+**Tratativa (Passo a Passo):**
+
+1. Identifique se a demanda está relacionada ao **Gestão Empresarial**.
+2. Informe ao cliente que o chamado será redirecionado para o suporte especializado da Gestão Empresarial (SystemTec).
+3. No **Blip Desk**, clique em **Finalizar**.
+4. Selecione a fila **Quero falar com a SystemTec**.
+5. Registre o atendimento no **Dashboard**.
+
+**Casos para Redirecionamento:**
+
+* Problemas técnicos no sistema Gestão Empresarial.
+* Erros ou falhas ao acessar funcionalidades.
+* Dúvidas sobre configuração ou parametrização.
+* Solicitações de atualização ou manutenção no sistema.
+
+**Observações:**
+
+* Sempre avise o cliente antes de redirecionar o atendimento.
+* O número do protocolo será enviado automaticamente ao cliente pelo sistema.
+
+-----
+
+## Envio de Mensagens Ativas – Blip Desk
+
+**Identificadores:**
+Blip Desk, Mensagens Ativas, WhatsApp, Contato, Template
+
+**Tratativa (Passo a Passo):**
+
+1. Acesse o Blip Desk e clique no ícone de **Mensagens Ativas**.
+2. Visualize o dashboard com as mensagens enviadas nas últimas 72 horas.
+3. Clique no botão azul **Enviar**.
+4. Pesquise o contato pelo nome ou telefone.
+5. Selecione o contato desejado e clique em **Continuar**.
+6. Escolha o template configurado para o departamento conforme o motivo do contato.
+7. Clique em **Continuar** para acessar a tela de edição da mensagem.
+8. Personalize as variáveis editáveis com as informações adequadas.
+9. Revise a mensagem e clique em **Enviar**.
+
+**Interação com o Cliente:**
+
+* A interação só começa após o cliente responder à mensagem ativa.
+* O atendimento segue normalmente dentro do Blip após a resposta.
+
+**Perguntas Frequentes:**
+
+* **Duração do contato ativo:** 24 horas após o envio.
+* **Mais de uma mensagem para o mesmo contato:** possível, mas não recomendado.
+* **Uso de WhatsApp externo:** não é permitido; todas as interações devem ocorrer dentro do Blip.
+
+----
+
+## Pente-fino / Verificação Geral no Ambiente do Cliente
+
+**Identificadores:**
+Pente-fino, Verificação, Ambiente do Cliente, Rede, Firewall, Firebird, Studio
+
+**Tratativa (Passo a Passo):**
+
+1. Verificar se há **IPv6 no servidor**. Caso exista, orientar o cliente a manter somente IPv4.
+2. Verificar se o **Firebird** está na versão **2.1.7**. Atualizar se necessário.
+3. Verificar as **configurações de energia do servidor** para que computador e HD não desliguem em caso de inatividade.
+4. Verificar **antivírus e firewall**, configurando exceções necessárias para o sistema.
+5. Executar o **PING** (`ping -t servidor`) e observar oscilações.
+6. Limpar **arquivos temporários** das pastas `temp` e `%temp%` em todos os computadores que utilizam o sistema.
+7. Verificar **bloqueio de rede** acessando o domínio da Radio Memory nos navegadores do cliente.
+8. Verificar se os **sistemas (Studio)** estão atualizados e realizar atualização, se necessário.
+
+**Observações:**
+
+* Estando todos os itens acima em conformidade, o ambiente está adequado para o funcionamento do sistema.
+* Caso o problema persista, contatar o grupo de suporte.
+
+---
+
+## Tempo de Primeira Resposta – Blip Desk
+
+**Identificadores:**
+TPR, Tempo de Primeira Resposta, Blip Desk, Atendimento, Monitoramento
+
+**Tratativa (Passo a Passo):**
+
+1. Monitorar continuamente a fila de atendimentos no Blip Desk.
+
+   * Caso precise se ausentar, pausar a fila.
+   * Dessa forma, não há risco de cliente entrar na fila sem receber atendimento.
+2. Automatizar respostas.
+
+   * Ao entrar um cliente na fila, enviar uma saudação automática.
+   * Isso garante que o cliente tenha a primeira interação de forma rápida.
+
+**Impacto do TPR:**
+
+* **Experiência do Cliente:** quanto menor o TPR, maior a satisfação.
+* **Retenção e Fidelização:** clientes que recebem suporte ágil tendem a permanecer e recomendar o serviço.
+* **Eficiência Operacional:** reduz sobrecarga da equipe e agiliza a resolução de problemas.
+
+**Meta do TPR:**
+
+* O tempo máximo aceitável em todos os atendimentos é **1 minuto**.
+
+**Observações:**
+
+* O TPR é um fator crítico para medir a eficiência do suporte e a satisfação do cliente.
+* A aplicação correta garante qualidade no atendimento dentro do Blip Desk.
+
+----
+
+## Transferência Comercial
+
+**Identificadores:**
+Transferência, Comercial, Blip Desk, Atendimento, Dashboard
+
+**Tratativa (Passo a Passo):**
+
+1. Identifique a necessidade de transferência:
+
+   * Cliente interessado em adquirir novos produtos ou serviços.
+   * Solicitação de informações sobre preços e planos.
+   * Dúvidas sobre contratos e renovações.
+   * Pedidos de demonstração de produtos.
+2. Informe ao cliente que ele será transferido para o setor comercial.
+3. No **Blip Desk**, clique em **Transferir**.
+4. Escolha a fila correta: **Transferir para o comercial**.
+5. Registre no **Dashboard do cliente** um resumo da solicitação, para que o setor comercial tenha contexto.
+6. Após a transferência, o cliente entrará automaticamente na fila de atendimento do time comercial.
+
+**Observações:**
+
+* Sempre informe ao cliente sobre a transferência antes de realizá-la.
+* O registro no Dashboard garante continuidade do atendimento pelo setor comercial.
+
+----
+
+## Transferência Financeiro
+
+**Identificadores:**
+Transferência, Financeiro, Blip Desk, Atendimento, Dashboard
+
+**Tratativa (Passo a Passo):**
+
+1. Identifique a necessidade de transferência:
+
+   * Cliente relata pagamento não identificado no sistema.
+   * Pedido de upgrade ou alteração de plano.
+   * Solicitação de renegociação de valores ou parcelamento.
+   * Pedido de segunda via de boleto ou nota fiscal.
+   * Solicitação de estorno ou reembolso.
+   * Problemas com métodos de pagamento (cartão recusado, falha na cobrança, etc.).
+2. Informe ao cliente que ele será transferido para o setor financeiro.
+3. No **Blip Desk**, clique em **Transferir**.
+4. Escolha a fila correta: **Transferir para o financeiro**.
+5. Registre no **Dashboard do cliente** um resumo da solicitação, para que o setor financeiro tenha contexto.
+6. Após a transferência, o cliente entrará automaticamente na fila de atendimento do time financeiro.
+
+**Observações:**
+
+* Sempre avise ao cliente antes de realizar a transferência.
+* O registro no Dashboard é obrigatório para garantir continuidade do atendimento.
+
+----
+
+## Análise Inteligente de Atendimento por I.A
+
+**Identificadores:**
+IA, Análise de Sentimento, Atendimento, GPT, Dashboard
+
+**Tratativa (Passo a Passo):**
+
+1. A cada 30 dias, a API com tecnologia GPT analisa o histórico recente do cliente.
+2. O sistema gera um resumo automático com dados como:
+
+   * ID do cliente
+   * Resumo do histórico de contatos
+   * Nível de satisfação (1 a 5)
+   * Número de tickets
+   * Recorrência de problemas
+   * Gravidade e urgência
+   * Classificação de suporte técnico
+   * Recomendação de abordagem
+3. O atendente recebe essas informações no Dashboard para contextualizar o atendimento.
+
+**Escalas e Avaliações:**
+
+* **Satisfação GPT:** 1 (muito insatisfeito) a 5 (muito satisfeito).
+* **Tempo de Espera:**
+
+  * > 30 min: Gravíssimo
+  * 20–30 min: Grave
+  * 10–20 min: Neutro
+  * 5–10 min: Ok
+  * < 5 min: Excelente
+* **Avaliação de Português:** 1 (muito ruim) a 5 (excelente).
+
+**Alertas Automáticos:**
+
+* Cliente crítico
+* Satisfação abaixo de 3
+* Recorrência
+* Urgência
+* Gravidade técnica
+* Rispidez detectada
+* Português com score ≤ 2
+
+**Benefícios:**
+
+* Atendimento com histórico completo.
+* Identificação em tempo real de clientes críticos.
+* Recomendações inteligentes para próximos atendimentos.
+* Avaliação da qualidade do suporte técnico.
+* Visão holística para ações proativas.
+
+**Observações:**
+
+* O recurso é projetado para apoiar o atendente e tornar o atendimento mais ágil, empático e assertivo.
+
+----
+
+

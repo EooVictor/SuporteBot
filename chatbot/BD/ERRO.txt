@@ -1,0 +1,297 @@
+## Erro Borland – BDE (Error S2108)
+
+**Causa:**
+Ocorre quando o Borland Database Engine (BDE) não está configurado corretamente na máquina do cliente.
+
+**Tratativa (Passo a Passo):**
+
+1. Atualizar o sistema do cliente para a versão mais recente.
+
+   * Evitar atualizar em casos de sistemas muito antigos (como Studio 2).
+   * Em caso de dúvida, consultar o grupo de suporte antes de aplicar a atualização.
+2. Configurar corretamente o BDE (Borland).
+
+**Observações:**
+
+* Sempre realizar backup da pasta **RadioImp** antes de efetuar qualquer modificação.
+* Em sistemas antigos, a atualização pode não ser recomendada.
+
+**Identificadores:**
+Erro Borland, BDE, Error S2108, Configuração Borland, Banco de Dados
+
+---
+
+## Erro "Anselmo" ao iniciar TCP/UDP
+
+**Causa:**
+Falha na inicialização da thread TCP/UDP, impedindo a aplicação de iniciar corretamente o serviço de recebimento.
+
+**Tratativa (Passo a Passo):**
+
+1. Substituir a pasta da licença do servidor.
+2. Reiniciar a máquina para aplicar as alterações.
+
+**Observações:**
+
+* Sempre realizar backup das pastas alteradas, adicionando a data da modificação no nome do diretório (exemplo: `Licenca_27-02-25`).
+
+**Identificadores:**
+Erro Anselmo, TCP/UDP, Thread, Licença, Servidor, Fatal Application Handler
+
+-----
+
+## Erro Bitmap
+
+**Causa:**
+Ocorre quando há problemas com a geração do QR Code no Studio.
+
+**Tratativa (Passo a Passo):**
+
+1. Caso o cliente nunca tenha configurado QRCode, realizar a configuração conforme documentação.
+2. Caso o cliente já tenha QRCode configurado em outra estação:
+
+   * Copiar a imagem do QRCode do cliente no disco **C:** e na pasta onde estão os templates.
+   * Colar a imagem na estação que apresentou erro.
+   * Após isso, a impressão funcionará normalmente.
+
+**Observações:**
+
+* O erro é identificado pela mensagem: *"Bitmap image is not valid."*
+* Garantir que o arquivo do QRCode esteja presente e corretamente alocado no diretório de templates.
+
+**Identificadores:**
+Erro Bitmap, QRCode, Studio 3, Template, Impressão
+
+----
+
+## Erro CodeLoad
+
+**Causa:**
+Ocorre quando o cliente tenta inserir imagem em formato **.cr2** (RAW) ao invés de **.jpeg**, gerando erro no Studio.
+
+**Tratativa (Passo a Passo):**
+
+1. Solicitar ao cliente que insira a imagem no formato correto (**.jpeg**).
+2. Substituir a imagem em formato incompatível e repetir a operação.
+
+**Observações:**
+
+* O erro é identificado pela mensagem: *Error code: 2 Load: Undefined Error*.
+* Apenas imagens compatíveis com o Studio devem ser utilizadas.
+
+**Identificadores:**
+Erro CodeLoad, Imagem, CR2, JPEG, Studio
+
+---
+
+## Erro IPL e Imagem não aparecendo no Template
+
+**Causa:**
+
+* Configuração incorreta do **PrintMode**.
+* Valor elevado do **Resize**.
+* Impressora padrão configurada incorretamente.
+* Parâmetro **ExportRes** muito alto.
+* Região do Windows não configurada para **PT-BR**.
+* Alguns tomógrafos exigem o idioma do sistema em **Inglês**.
+
+**Tratativa (Passo a Passo):**
+
+1. Acesse o arquivo `cstfudo2.ini` do cliente.
+2. Verifique se a imagem foi aplicada com Resize.
+3. Corrija o parâmetro `PrintMode` (definir como **3**).
+4. Ajuste o parâmetro `ExportRes` (máximo recomendado: **500**).
+5. Caso o problema seja de exibição no template:
+
+   * Alterar a região do Windows para **Brasil (PT-BR)**.
+   * Se necessário, configurar idioma do sistema como **Inglês**.
+6. Reinicie o Windows para aplicar as alterações.
+
+**Observações:**
+
+* Erro IPL normalmente aparece com mensagem de falha na geração de imagem.
+* Alterar parâmetros incorretos pode afetar a geração de relatórios e templates.
+* Caso o problema persista, encaminhar para o grupo de suporte.
+
+**Identificadores:**
+Erro IPL, PrintMode, ExportRes, Resize, Template, Imagem não aparece, Studio
+
+----
+
+## Erro de Senha do Windows
+
+**Causa:**
+Ocorre quando as políticas de segurança de rede do cliente não permitem logon de usuários “não autenticados”, bloqueando o acesso ao servidor pela rede.
+
+**Tratativa (Passo a Passo):**
+
+1. Pressionar **Win + R**, digitar `gpedit.msc` e pressionar **Enter**.
+
+   * Obs.: Disponível apenas no Windows versão **Pro**. Caso seja versão **Home**, solicitar senha do servidor ou acionar o T.I. do cliente.
+2. Navegar até:
+   **Modelos Administrativos > Rede > Estação de trabalho do LANMAN > Habilitar logons de convidados não seguros**.
+3. Clicar duas vezes sobre a opção e configurar como **Habilitado**.
+4. Confirmar, aplicar alterações e reiniciar o computador.
+
+**Observações:**
+
+* Caso o problema persista, verificar comunicação da rede, faixas de IP e permissões de acesso.
+* Se necessário, encaminhar ao grupo de Suporte para análise mais detalhada.
+
+**Identificadores:**
+Erro Senha Windows, Credenciais de Rede, Acesso Servidor, Logon Convidado, gpedit
+
+----
+
+## Erros Comuns Twain
+
+### Erro Code 804
+
+**Causa:**
+Configuração incorreta no arquivo `twainmaster.ini`, relacionado à densidade de bits da imagem exportada.
+
+**Tratativa (Passo a Passo):**
+
+1. Verifique se o arquivo `twainmaster.ini` está no caminho:
+   `C:\Windows\twain_32\VistaScan\twainmaster.ini`
+
+   * Se não existir, procurar na pasta **twain\_32**.
+2. Ajuste a configuração da densidade de bits de **16 bits** para **8 bits**.
+3. Na seção `[TWAIN]`, altere o parâmetro `Transfer` de **MEMORYB** para **MEMORYA**.
+
+**Observações:**
+
+* Após a correção, reinicie o sistema para validar a integração.
+
+**Identificadores:**
+Erro Twain, Code 804, Twainmaster.ini, Scanner, Transfer MEMORYA
+
+---
+
+### Erro de Pasta "Images"
+
+**Causa:**
+Arquivos presentes na pasta **Images** do Scanner ou do **ProgramData** impedem a integração com o Studio.
+
+**Tratativa (Passo a Passo):**
+
+1. Acesse o caminho do scanner:
+   `C:\ProgramData\{Fabricante}\Images`
+2. Localize a pasta **Images** e renomeie-a.
+3. Se necessário, habilite a exibição de pastas ocultas no Windows para acessar o diretório **ProgramData**.
+
+**Observações:**
+
+* A pasta pode ter nomes diferentes conforme o modelo do scanner.
+* Em integrações com **Air Techniques, Dürr, Kavo ou Gnatus**, não é necessário configurar tags específicas.
+* No arquivo `ini` do Studio, mantenha o parâmetro padrão:
+  `twain=1`
+
+**Identificadores:**
+Erro Twain, Pasta Images, ProgramData, Scanner, Integração
+
+----
+
+## Falta de Armazenamento/Espaço em Disco (Stream Write Error)
+
+**Causa:**
+Ocorre devido à falta de espaço no disco do servidor ou da estação, impedindo o funcionamento correto do sistema.
+
+**Tratativa (Passo a Passo):**
+
+1. Limpar o armazenamento do disco, excluindo componentes não utilizados do sistema.
+2. Caso não seja possível excluir nada, orientar o cliente a acionar o T.I. da clínica para liberar espaço.
+3. Se disponível, transferir o banco de dados para outro disco com espaço livre.
+
+**Observações:**
+
+* O erro é identificado pela mensagem: *Stream Write Error*.
+* Espaço insuficiente pode causar falhas de gravação e travamento do sistema.
+
+**Identificadores:**
+Stream Write Error, Espaço em Disco, Armazenamento, Servidor, Estação
+
+----
+
+## Lista de Liberações de Antivírus e Rede para o Cliente
+
+**Causa:**
+Ambientes de clientes podem bloquear o funcionamento do sistema devido a regras de antivírus, firewall ou rede que impedem a execução correta dos softwares e a comunicação com o servidor.
+
+**Tratativa (Passo a Passo):**
+
+1. Solicitar ao cliente ou T.I. local a liberação de tráfego na porta **12345** para o IP do servidor (necessária para validação da licença e acesso ao banco de dados).
+
+   * Se necessário, também liberar as portas **3050** e **3060**.
+2. Configurar exceções no antivírus para não excluir ou bloquear os executáveis:
+
+   * `Studio3.exe`
+   * `Xwork.exe`
+   * `radioclef.exe`
+   * `RImp2000.exe`
+   * `RMLicserver.exe`
+   * `RMLicserver_KeepAlive.exe`
+3. Verificar caminhos para o servidor (ajustar para cada cliente, substituindo `C:` por `\\nome-ou-ip-do-servidor`):
+
+   * `C:\Radiodcef Studio 2\Studio\Studio3.exe`
+   * `C:\Radiodcef Studio 2\XWork\Xwork.exe`
+   * `C:\Radiodcef Studio 2\Radioclef\radioclef.exe`
+   * `C:\Radiodcef Studio 2\RadioImp\RImp2000.exe`
+   * `C:\Radiodcef Studio 2\Licenca\Server\RMLicServer.exe`
+   * `C:\Radiodcef Studio 2\Licenca\Server\RMLicServer_KeepAlive.exe`
+   * Pasta: `C:\Radiodcef Studio 2\Studio\Temp`
+4. Garantir comunicação com os seguintes endereços e portas:
+
+   * **Para comunicação com a web (5530–5560):**
+     `187.1.88.122:5530-5560`
+   * **Comunicações via porta 80:**
+     `34.194.15.9:80`
+     `52.205.151.80:80`
+     `13.107.4.50:80`
+     `105.19.209.14:80`
+   * **Comunicações via porta 8080:**
+     `34.194.15.9:8080`
+     `52.205.151.80:8080`
+     `13.107.4.50:8080`
+     `105.19.209.14:8080`
+5. Domínios a liberar:
+
+   * `idoc.radiomemory.com.br`
+   * `radiomemory.com.br`
+   * `ftp.radiomemory.com.br`
+   * `api.radiomemory.com.br`
+   * **Domínio do cliente**
+
+**Observações:**
+
+* Sempre confirmar se as exceções foram aplicadas tanto no antivírus quanto no firewall.
+* Problemas de comunicação podem ser resolvidos ao revisar estas liberações.
+
+**Identificadores:**
+Antivírus, Firewall, Liberação de Rede, Portas, Studio, XWork, RMLicserver, Radiomemory
+
+-----
+
+## Erro ao Tentar Salvar Análise Facial no iCef
+
+**Causa:**
+O erro ocorre devido a falhas na matriz utilizada pelo iCef, causando instabilidade ao salvar a análise facial.
+
+**Tratativa (Passo a Passo):**
+
+1. Baixar o arquivo ZIP fornecido para substituição da matriz.
+2. Extrair a matriz do iCef e exportar para a pasta:
+   `C:\Radiocef Studio 2\Radiocef\Matriz`
+3. Substituir os arquivos da matriz do Studio pelos arquivos contidos na pasta **"Arquivos para substituir na matriz"**.
+4. Criar um novo ZIP contendo as pastas **Anas** e **Arquivos**, nomeando-o como `MatrizRCef.zip`.
+5. Acessar o iCef no domínio do cliente e realizar o upload da nova matriz editada.
+
+**Observações:**
+
+* O erro é identificado pela mensagem:
+  *RCEserver error \[7]: Access violation at address XXXXX in module RCEngine810.dll*.
+* Após o upload da matriz corrigida, a análise facial deve funcionar corretamente.
+
+**Identificadores:**
+Erro iCef, Análise Facial, MatrizRCef, RCEngine810.dll, Access Violation
+

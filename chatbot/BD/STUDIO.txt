@@ -1,0 +1,479 @@
+
+## Como Alterar os Generators do Studio pelo IBExpert
+
+**Causa:**
+A alteração dos generators no banco de dados do Studio é necessária para manter a continuidade da numeração de documentos e pacientes. Esse procedimento deve ser realizado quando ocorre duplicação do banco de dados, garantindo que a sequência de pedidos seja preservada e evitando conflitos em integrações, como com a Sirona.
+
+**Tratativa (Passo a Passo):**
+
+**Antes de iniciar:**
+
+* Feche o Studio em todas as estações até a conclusão do procedimento.
+* O processo deve ser realizado diretamente no servidor do cliente.
+
+1. **Instalação do IBExpert**
+
+   * Baixe e instale o **IBExpert** a partir do site oficial.
+
+2. **Ativação do IBExpert**
+
+   * Na pasta de instalação do IBExpert, substitua os arquivos fornecidos (`Substituir`, `Instalacao`, `setup_trial`).
+   * Copie também o arquivo **GDS32.dll** para as pastas `System32` e `SysWOW64`.
+
+3. **Configuração do Banco de Dados**
+
+   * Abra o IBExpert e selecione **Register Database**.
+   * Preencha os campos:
+
+     * **Server:** Local
+     * **Server Version:** Firebird 2.1
+     * **Database Path:** caminho do banco de dados do Studio
+     * **Usuário:** `SYSDBA`
+     * **Senha:** `masterkey`
+     * **Font Character Set:** `DEFAULT_CHARSET`
+   * Clique em **Register**.
+
+4. **Alteração dos Generators**
+
+   * No banco conectado, expanda o menu **Generators**.
+   * Localize os generators: `CODIGOPACIENTE_GEN` e `CODIGODOCUMENTACAO_GEN`.
+   * Altere o campo **Value** conforme necessário.
+   * Salve clicando no ícone de raio e depois em **Commit**.
+
+**Observações:**
+
+* Essa alteração geralmente é feita após duplicação do banco de dados.
+* Em integrações com a **Sirona**, o ajuste é fundamental para evitar pedidos duplicados. O número do Studio deve ser sempre maior que o da Sirona.
+
+**Identificadores:**
+studio, banco de dados, ibexpert, generators, duplicação de banco, codigopaciente\_gen, codigodocumentacao\_gen, firebird 2.1, sysdba, masterkey, sirona
+
+---
+
+## Como Ativar as Opções de Visibilidade no Studio
+
+**Causa:**
+Em algumas estações que utilizam o Studio 3, as opções de publicação na aba **Distribuição** podem não estar disponíveis. Isso impede o envio de exames para o **iDoc** do dentista ou do laudador.
+
+**Tratativa (Passo a Passo):**
+
+1. No Studio, clique em **Arquivo** (canto superior esquerdo).
+2. No menu, selecione **Configurações**.
+3. Acesse a aba **Internet**.
+4. Marque as opções:
+
+   * **Permitir Laudos On-line**
+   * **Permitir Alterar Visibilidade**
+5. Reinicie a máquina para aplicar as alterações.
+
+**Observações:**
+
+* Antes de alterar, confirme com a clínica como ela faz a distribuição das documentações.
+* Caso necessário, ajuste diretamente na mesma janela as opções de distribuição.
+
+**Identificadores:**
+studio, opções de visibilidade, distribuição, idoc, permitir laudos online, permitir alterar visibilidade, internet, publicação
+
+---
+
+## Habilitar Captura de Webcam para Foto do Paciente no Studio (2 e 3)
+
+**Causa:**
+Em algumas estações, a captura de foto do paciente diretamente pelo Studio pode não estar habilitada, sendo necessário configurar o driver de captura da webcam.
+
+**Tratativa (Passo a Passo):**
+
+1. **Baixar o driver:**
+
+   * Faça o download do driver de captura para Studio.
+
+2. **Colocar o arquivo na pasta correta:**
+
+   * Mova o arquivo para `C:\Windows\twain_32`.
+   * Se a pasta não existir, crie-a com permissões administrativas.
+
+3. **Verificar o arquivo:**
+
+   * Confirme que o driver está dentro da pasta `twain_32`.
+
+4. **Executar teste no Studio:**
+
+   * Abra o Studio no computador do cliente.
+   * No perfil do paciente, clique com o botão direito na área da foto e selecione **Capturar**.
+
+**Observações:**
+
+* Se não funcionar, teste a webcam em [https://pt.webcamtests.com/](https://pt.webcamtests.com/).
+* Reinicie o Studio após copiar o arquivo, caso o driver não seja reconhecido.
+* Se ainda assim não funcionar, contate a equipe de suporte.
+
+**Identificadores:**
+studio, webcam, captura de foto, twain\_32, driver de captura, paciente, teste de webcam
+
+---
+
+
+## Como Instalar e Configurar o BDE (Borland)
+
+**Causa:**
+O BDE (Borland Database Engine) é um "motor" de banco de dados baseado em Windows, utilizado nas versões mais antigas do sistema. Embora raramente precise ser configurado, em alguns casos é necessário ajustar sua instalação para o correto funcionamento do Studio.
+
+---
+
+**Tratativa (Passo a Passo):**
+
+1. **Sobre o BDE**
+
+   * O BDE é utilizado para o funcionamento de bancos de dados mais antigos.
+
+2. **Instalando o BDE**
+
+   * A instalação do BDE geralmente é executada junto com a instalação do Studio, tanto em estações quanto no servidor.
+   * Ao iniciar a instalação do Studio, será exibida a tela **Instalação Básica**, que corresponde ao BDE.
+   * Clique em **Next** até o final para concluir a instalação.
+   * O instalador do BDE fica em:
+     `C:\Radiocef Studio 2\Instalacao\BDE`
+
+3. **Configurando o BDE**
+
+   * Abra o **Painel de Controle do Windows** e execute o **BDE Administrator**.
+
+   * Vá em **Configuration > Drivers > Native** e clique em **PARADOX**.
+
+     * No campo **NET DIR**, coloque o caminho do servidor do Studio 2.
+       Exemplo: `\\Nome_do_Servidor\Radiocef Studio 2`
+
+   * Em seguida, clique em **MSACCESS**.
+
+     * Configure conforme o padrão da instalação, mantendo os valores de versão e driver.
+
+   * Após realizar as alterações, clique com o botão direito em **Native** e depois em **Apply**.
+
+   * O BDE estará configurado.
+
+---
+
+**Observações:**
+
+* Essa configuração é necessária apenas em versões antigas do Studio que ainda utilizam o BDE.
+* Alterações incorretas no BDE podem causar falhas de comunicação com o banco de dados.
+
+---
+
+**Identificadores:**
+studio, bde, borland, instalação bde, configuração bde, paradox, msaccess, radiocef studio 2
+
+---
+
+## Passo a Passo para Inserção de Templates no Studio
+
+**Causa:**
+A inserção de templates é necessária para padronizar a documentação de exames no Studio, permitindo que modelos pré-definidos sejam incluídos junto às imagens do paciente.
+
+---
+
+**Tratativa (Passo a Passo):**
+
+1. Abra a documentação desejada no Studio que já contenha as imagens.
+2. Clique na aba **Impressão**, no canto superior direito da tela.
+3. Escolha a **pasta de templates** desejada.
+4. Selecione um ou mais templates (ficarão destacados em azul).
+5. Clique em **Inserir relatórios selecionados na doc** para adicioná-los à documentação.
+
+---
+
+**Observações:**
+
+* Após a inserção, os templates passam a fazer parte da documentação do paciente e podem ser visualizados junto às imagens.
+
+---
+
+**Identificadores:**
+studio, template, documentação, impressão, inserir relatórios, modelos de exames, padronização
+
+---
+
+## Configurando Burn Studio
+
+**Causa:**
+O BurnStudio é uma ferramenta complementar utilizada para gravação de CDs no Studio. Em casos onde a função de gravação não está funcionando corretamente, é necessário configurar ou reinstalar o BurnStudio.
+
+---
+
+**Tratativa (Passo a Passo):**
+
+1. Baixe o executável do **BurnStudio** a partir do link fornecido pelo atendimento.
+2. Instale o programa normalmente.
+3. Reinicie a máquina para aplicar as alterações.
+
+---
+
+**Observações:**
+
+* Sempre faça backup das pastas que forem alteradas, adicionando a data de modificação no nome do diretório.
+
+  * Exemplo: `Licenca_27-02-25`
+
+---
+
+**Identificadores:**
+studio, burnstudio, gravação de cd, instalação burnstudio, configuração burnstudio
+
+---
+
+## Configuração da Dry
+
+**Causa:**
+A impressora radiográfica Dry é utilizada para imprimir radiografias (Panorâmica, Telerradiografia, Carpal) com alta qualidade e precisão. O módulo de impressão **Direct DICOM (DD)** permite enviar e imprimir diretamente do Studio. Para funcionar corretamente, é necessário validar a licença, coletar as informações da impressora e configurar no Studio.
+
+---
+
+**Tratativa (Passo a Passo):**
+
+1. **Validação da licença**
+
+   * Confirme se o cliente possui o produto **Dicom Print** em seu **Dashboard do Assinante**.
+   * Caso não tenha, a configuração não será possível.
+
+2. **Coleta de dados da impressora**
+
+   * Solicite ao cliente as seguintes informações:
+
+     * **AE Title**
+     * **IP**
+     * **Porta**
+     * **Resolução**
+
+3. **Configuração no Studio**
+
+   * No Studio, acesse: **Arquivo > Configurações > Dicom Print**.
+   * Preencha os campos com as informações fornecidas (AE Title, IP, Porta e Resolução).
+   * Salve as alterações.
+   * Caso os dados estejam corretos, a impressora Dry passará a funcionar normalmente.
+
+---
+
+**Observações:**
+
+* Há resoluções específicas para diferentes modelos de impressora Dry. Consulte a lista de resoluções comuns caso haja dúvidas.
+
+---
+
+**Identificadores:**
+studio, dry, impressora dry, dicom print, impressão radiográfica, configuração dry, ae title, ip, porta, resolução
+
+---
+
+## Como Ativar as Opções de Visibilidade
+
+**Causa:**
+As opções de visibilidade no Studio controlam como a documentação será disponibilizada para dentistas, pacientes e radiologistas. Caso não estejam configuradas corretamente, os exames podem não ser exibidos no **Portal S3** ou na **Tela Híbrida**.
+
+---
+
+**Tratativa (Passo a Passo):**
+
+Na aba **Distribuição** da documentação do paciente, existem três opções de visibilidade:
+
+1. **Pronta (Disponível para os dentistas)**
+
+   * A documentação fica disponível imediatamente para os dentistas após ser publicada.
+   * O status aparecerá como disponível no **Portal S3** e na **Tela Híbrida**.
+
+2. **A Laudar (Restrita aos Radiologistas)**
+
+   * Apenas radiologistas podem visualizar o documento.
+   * O dentista e o paciente não terão acesso até que o exame seja liberado pelo radiologista.
+
+3. **A Laudar (Laudador pode liberar)**
+
+   * O documento é liberado automaticamente após o laudador concluir o laudo.
+   * O exame passa a estar acessível ao dentista e ao paciente.
+
+---
+
+**Observações:**
+
+* Antes de alterar qualquer configuração, verifique com a clínica como ela prefere gerenciar a distribuição dos exames.
+* As configurações são aplicadas **por máquina**, não de forma global.
+
+---
+
+**Identificadores:**
+studio, visibilidade, opções de visibilidade, distribuição, pronta, a laudar, laudador pode liberar, portal s3, tela híbrida
+
+---
+
+## Recortes Automáticos de I.A
+
+**Causa:**
+Os recortes automáticos de I.A do Studio podem ser desativados quando o cliente não adapta suas fotos para o funcionamento da ferramenta. Isso ocorre por diversos motivos, como resolução incorreta ou recortes manuais feitos em outros softwares.
+
+---
+
+**Tratativa (Passo a Passo):**
+
+1. **Sobre a desativação dos recortes de I.A**
+
+   * Os recortes automáticos de I.A são geralmente desativados quando as imagens não seguem o padrão esperado pelo Studio.
+
+2. **Realização de recortes manuais por fora do Studio**
+
+   * Caso o cliente realize recortes manuais em outros softwares (como Photoshop), isso pode gerar conflito na criação dos templates de fotos e levar à solicitação de desativação do recurso.
+
+3. **Imagens com resolução incorreta**
+
+   * Se o cliente inserir imagens em resoluções incorretas (por exemplo, fotografias extra-orais em dimensões diferentes), a I.A pode falhar.
+   * É importante identificar e mostrar ao cliente que o problema está nas fotos e não na I.A.
+
+4. **O que fazer após retirar os recortes?**
+
+   * Se o cliente optar pelo desligamento dos recortes automáticos de I.A, registre os dados do cliente no grupo de atendimento do suporte.
+   * Esse caso deve ser encaminhado para o time de **Customer Success (CS)**, que providenciará novo treinamento para o cliente, evitando o risco de cancelamento do produto de I.A.
+
+---
+
+**Observações:**
+
+* Sempre oriente o cliente sobre a importância de seguir os padrões corretos de imagens para utilização da I.A.
+
+---
+
+**Identificadores:**
+studio, recorte automático, inteligência artificial, ia, recorte manual, resolução incorreta, customer success, treinamento
+
+---
+
+## Reset da Licença Studio 1
+
+**Causa:**
+Em alguns casos é necessário realizar o reset remoto da licença do **Studio 1**, principalmente quando há problemas de validação da chave.
+
+---
+
+**Tratativa (Passo a Passo):**
+
+**Observação:** É necessário ter acesso ao **ADMxp** para seguir este procedimento. Caso não possua acesso, solicite auxílio no grupo de suporte.
+
+### 1. Abrir o Hprot3
+
+1.1. Acesse o programa **Hprot3** na conexão ADMxp pelo Menu Iniciar.
+1.2. Execute o programa e abra as extensões **.hpa**, conforme exemplos.
+
+### 2. Ativação do Radiocef
+
+2.1. Utilize os arquivos **Radiocef.hpa** ou **Radiocef4.hpa**. Caso o primeiro não funcione, utilize o segundo.
+
+### 3. Ativação do Radioimp
+
+3.1. Utilize o arquivo **RADIOIMP.hpa** para a ativação.
+3.2. Ao selecionar a extensão, escolha a opção **Reset Remoto**.
+3.3. Avance para a próxima tela.
+3.4. Na máquina do cliente, abra o programa **CONFIG** (ícone de um cadeado e disquete) na opção Reset Remoto.
+
+* Caminhos possíveis:
+
+  * `C:\Radio Memory\radiocef`
+  * `C:\Radio Memory\radioimp`
+
+3.5. Clique em **Avançar** até a próxima tela.
+3.6. Copie os valores exibidos e volte no programa **Hprot3**. Insira as informações de **Número de Série**, **Contador Atual** e **Complemento**.
+3.7. Após inserir os valores:
+
+* Clique em **Avançar**
+* Selecione a opção **Licença Perdida (Restauração Temporária)**
+* Defina o número de dias como **9999**
+
+3.9. Copie o **código gerado** e cole no campo **Código de Reset** no servidor do cliente.
+
+### 4. Conclusão
+
+Após concluir todos os passos acima, o reset será executado com sucesso.
+Agora vá até o servidor do cliente e execute os programas normalmente.
+
+---
+
+**Observações:**
+
+* Sempre validar se o cliente está no servidor correto antes de aplicar o reset.
+* O reset é uma restauração temporária para manter o sistema ativo até que a chave definitiva seja revalidada.
+
+---
+
+**Identificadores:**
+studio, licença studio 1, reset remoto, hprot3, admxp, radiocef, radioimp, config, licença perdida
+
+---
+
+## Resoluções DICOM
+
+**Causa:**
+Cada impressora DICOM trabalha com uma resolução específica. Caso a configuração esteja incorreta, as imagens podem sair cortadas ou em tamanho reduzido.
+
+---
+
+**Resoluções Impressoras DICOM:**
+
+* **Carestream DV5800** – Resolução **508**
+* **Carestream DV5700** – Resolução **325**
+* **Carestream DV5950** – Resolução **508**
+* **Carestream DV6850** – Resolução **650**
+* **AGFA DS5302** – Resolução **320**
+* **AGFA DS5300** – Resolução **320 ou 325**
+* **DRYPIX Lite** – Resolução **300**
+* **DRYPIX** – Resolução **390** (neste caso, deve-se testar valores de DPI próximos a este)
+* **DRYPRIMA** – Resoluções possíveis: **254, 325 ou 508**
+
+  * Utilize **325** como padrão.
+  * Se a impressão sair cortada, utilize **254**.
+  * Se a impressão sair pequena, utilize **508**.
+
+---
+
+**Observações:**
+
+* Sempre valide com o cliente a impressora utilizada antes de alterar a configuração.
+* A escolha da resolução correta garante que as imagens saiam em tamanho real e sem cortes.
+
+---
+
+**Identificadores:**
+dicom, impressora, resolução, dpi, carestream, agfa, drypix, dryprima
+
+---
+
+## Como trocar o servidor
+
+**Causa:**
+A troca de servidor é necessária quando há substituição ou atualização do equipamento que hospeda o Studio. Esse processo requer backup e transferência dos arquivos para evitar perda de dados.
+
+---
+
+**Tratativa (Passo a Passo):**
+
+### 1. Realizar o backup do servidor atual
+
+* O backup é de responsabilidade do cliente. A equipe deve apenas orientar os caminhos das pastas relacionadas ao programa:
+
+  * **C:\Radiocef Studio 2**
+* Caso o cliente tenha pastas do programa em outras unidades (ex.: **D:** ou **E:**), também é necessário realizar o backup delas.
+* Para evitar dificuldades, pode-se oferecer **suporte remoto** para localizar pastas ou iniciar o processo de backup.
+
+### 2. Transferir os arquivos para o novo servidor
+
+* Após o cliente realizar o backup, oriente-o a copiar as pastas para o diretório \**C:\** do novo servidor.
+* Se necessário, acesse remotamente para verificar a execução correta do processo e esclarecer dúvidas.
+
+---
+
+**Observações:**
+
+* Sempre confirme se o cliente fez backup de todas as unidades.
+* A responsabilidade da execução do backup é do cliente; a equipe apenas orienta.
+
+---
+
+**Identificadores:**
+servidor, troca, backup, restore, radiocef, migração
+
+---

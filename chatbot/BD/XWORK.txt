@@ -1,0 +1,186 @@
+---
+
+## Manutenção – S3Up (Backup Automático)
+
+**Tratativa (Passo a Passo):**
+
+1. Solicite o acesso ao TeamViewer do servidor.
+2. Verifique o tamanho do banco de dados:
+
+   * Se ultrapassar 110MB → Agende uma manutenção do banco no XWork.
+   * Se estiver dentro do limite → Continue.
+3. Acesse a pasta do S3Up do cliente e confirme se o S3up.exe está na versão mais recente.
+4. Execute o S3up.exe como Administrador e aguarde o retorno no arquivo s3up.log.
+5. Se o log mostrar sucesso, finalize o procedimento.
+6. Caso o log apresente erro, reinstale o S3Up com o instalador mais recente.
+7. Durante a reinstalação (executar como Administrador), o sistema pedirá o arquivo .ppk (configuração única de cada cliente). Solicite no grupo de suporte e aguarde que alguém com acesso ao RadioServer envie.
+8. Se mesmo após a reinstalação o log continuar com erro, entre em contato com o desenvolvedor Jardel.
+9. Após confirmar o sucesso do log, verifique se o Agendador de Tarefas está configurado.
+
+---
+
+**Observações:**
+
+* Sempre execute o S3up.exe como Administrador e remova qualquer modo de compatibilidade.
+* Bancos entre 100MB e 110MB devem passar por manutenção de banco antes do backup.
+* Caso o cliente não autorize o procedimento, solicite autorização formal por e-mail.
+
+---
+
+## Configuração do Agendador de Tarefas – S3Up
+
+**Tratativa (Passo a Passo):**
+
+1. Abra o Agendador de Tarefas do Windows.
+2. Clique com o botão direito em um espaço em branco do Agendador e selecione Criar nova tarefa.
+3. Na aba Geral, configure:
+
+   * Executar somente quando o usuário estiver conectado.
+   * Executar com privilégios mais altos.
+   * Configurar para: Windows Vista / Windows Server 2008.
+4. Vá até a aba Disparadores e clique em Novo.
+5. Configure:
+
+   * Iniciar a tarefa: Em um agendamento.
+   * Tipo: Diário.
+   * Repetir a tarefa a cada 1 hora por um período de 12 horas.
+   * Marcar a opção “Atrasar tarefa em até 1 hora”.
+6. Vá até a aba Ações e clique em Novo.
+7. Configure a ação para iniciar o programa s3up.exe, definindo o caminho:
+
+   * C:\Radiocef Studio 2\XWork\Xwork.exe
+
+---
+
+**Observações:**
+
+* Essa configuração garante que o S3Up seja executado de forma automática pelo Agendador de Tarefas.
+* Sempre utilize privilégios de administrador durante a configuração.
+
+----
+
+## Estrutura da pasta XWork
+
+**O que é o XWork**
+O XWork, ou Gestão Profissional, é o software completo para controle operacional. Ele abrange desde o agendamento de pacientes até a análise detalhada de fluxo de caixa, produção e desempenho, oferecendo uma solução integrada para otimizar a gestão e a performance da operação.
+
+**Principais componentes das pastas do programa**
+
+* **xwork.exe:** Executável principal do programa XWork.
+* **banco.xwf:** Arquivo de banco de dados do XWork, cujo tamanho varia conforme a quantidade de dados armazenados no programa.
+* **banco.pk.fdb:** Arquivo de banco de dados no formato Firebird utilizado pelo programa.
+* **xwork.ult:** Arquivo responsável pela inicialização do banco de dados, exigindo configuração do caminho de rede para o arquivo .xwf.
+* **abrir\_xwork.exe:** Ferramenta para correção de problemas no programa, incluindo reparos e atualizações de índices.
+* **s3up:** Para clientes do Gestão Profissional, contém o executável s3up.exe, que realiza o backup do banco de dados na web e permite a visualização de informações no Portal S3.
+
+----
+
+## Manutenção – Banco de Dados XWork
+
+**Tratativa (Passo a Passo):**
+
+1. Antes de iniciar a manutenção, realizar as **verificações pré-manutenção** do XWork.
+2. Abrir o banco no Access e passar por todas as tabelas verificando erros para remover.
+3. Limpar dados das tabelas **XW16 | 16A | 16C | 23A | 24C | 24CA**, deixando apenas do período combinado com o cliente.
+
+   * **XW16A:** remover registros cujo CP Pedido seja menor que o menor CP da XW16.
+   * **XW16C:** mesmo critério da XW16A.
+   * **XW23 e XW23A:** com base na data de registro.
+   * **XW24C e XW24CA:** com base na data de registro.
+4. Executar a SQL para remover clientes órfãos.
+5. Verificar nas tabelas XW01, XW16A e XW16B se existe a linha de inicialização. Se não existir, copiar de outro banco e complementar.
+6. Voltar a versão do banco e converter usando a versão mais nova do arquivo **xwork.exe**.
+7. Verificar após a conversão se as permissões dos usuários estão corretas.
+8. Trocar a pasta **xwf** do cliente por uma nova, mantendo:
+
+   * **arquivos.xwf**
+   * **xwork.ult**
+   * Pasta **S3up**
+   * **pk.fdb**
+9. Padronizar tamanho do campo nome/cliente nas tabelas **XW01, XW16, XW24C, XW24CA** para 65 caracteres.
+10. Se não reconverter o banco, verificar se os campos nome/cliente nas tabelas **XW01, XW16, XW24C e XW24CA** têm o mesmo tamanho.
+
+---
+
+**Observações:**
+
+* Alguns erros são removidos apenas no Excel, sendo necessário exportar a tabela, tratar e importar novamente.
+* Após as etapas, realizar testes finais no banco convertido.
+
+------
+
+## Problemas do XWork com Windows Server
+
+**Causa:**
+O principal motivo está na aplicação do **Oportunistic Lock (OPPLOCK)**, tecnologia nativa do Windows Server. Esse mecanismo permite que uma estação de trabalho armazene localmente em cache um arquivo da rede, reduzindo tráfego e tempo de resposta. Entretanto, em sistemas como o **Gestão Profissional (XWork)**, que dependem de múltiplos acessos concorrentes, o OPPLOCK gera riscos.
+
+**Explicação técnica:**
+
+* O OPPLOCK atua como um lock dinâmico, dando à estação de trabalho o direito temporário de manipular um arquivo em cache, sincronizando posteriormente com o servidor.
+* Isso funciona bem em aplicações sem múltiplos acessos, mas no XWork pode causar:
+
+  * **Conflito de índices:** alterações simultâneas podem gerar identificadores iguais.
+  * **Dados duplicados:** a mesma informação pode ser gravada mais de uma vez.
+  * **Perda de dados:** alterações feitas antes do fechamento podem não ser sincronizadas.
+
+**Quando não seria um problema:**
+
+* Se apenas uma máquina alterasse o arquivo, o uso do OPPLOCK não causaria impacto.
+* Em ambientes multiusuário, o risco de inconsistência é alto.
+
+**Tratativa:**
+
+1. Retirar o XWork do Windows Server.
+2. Instalar o XWork em uma máquina com Windows comum (Windows 10, 11, etc.).
+
+**Observação:**
+Essa configuração garante maior integridade dos dados, reduzindo os riscos de corrupção e perda de informações no Gestão Profissional / XWork.
+
+----
+
+## Problemas do XWork com Windows Server
+
+**Causa:**
+O principal motivo está na aplicação do **Oportunistic Lock (OPPLOCK)**, tecnologia nativa do Windows Server. Esse mecanismo permite que uma estação de trabalho armazene localmente em cache um arquivo da rede, reduzindo tráfego e tempo de resposta. Entretanto, em sistemas como o **Gestão Profissional (XWork)**, que dependem de múltiplos acessos concorrentes, o OPPLOCK gera riscos.
+
+**Explicação técnica:**
+
+* O OPPLOCK atua como um lock dinâmico, dando à estação de trabalho o direito temporário de manipular um arquivo em cache, sincronizando posteriormente com o servidor.
+* Isso funciona bem em aplicações sem múltiplos acessos, mas no XWork pode causar:
+
+  * **Conflito de índices:** alterações simultâneas podem gerar identificadores iguais.
+  * **Dados duplicados:** a mesma informação pode ser gravada mais de uma vez.
+  * **Perda de dados:** alterações feitas antes do fechamento podem não ser sincronizadas.
+
+**Quando não seria um problema:**
+
+* Se apenas uma máquina alterasse o arquivo, o uso do OPPLOCK não causaria impacto.
+* Em ambientes multiusuário, o risco de inconsistência é alto.
+
+**Tratativa:**
+
+1. Retirar o XWork do Windows Server.
+2. Instalar o XWork em uma máquina com Windows comum (Windows 10, 11, etc.).
+
+**Observação:**
+Essa configuração garante maior integridade dos dados, reduzindo os riscos de corrupção e perda de informações no Gestão Profissional / XWork.
+
+----
+
+## Verificações Pré-Manutenção – XWork
+
+**Tratativa (Passo a Passo):**
+
+1. Verificar se o servidor é Windows Server. Caso seja, orientar o cliente a migrar somente o servidor do XWork para um Windows comum.
+2. Verificar permissões de usuário e aplicar permissão “todos”.
+3. Limpar a pasta `%temp%`.
+4. Revisar antivírus, permissões, exclusões de pasta e filtro de firewall na placa de rede.
+5. Verificar rede e oscilações de ping. Ideal: abaixo de 5 ms (oscilações acima de 10 ms podem indicar problemas).
+6. Checar configurações de energia do servidor para evitar desligamento do HD.
+7. Após realizar as verificações, agendar a manutenção no grupo de suporte, informando ao cliente:
+
+   * Manutenções são realizadas das 09h00 às 17h00 de segunda a sexta.
+   * Durante o processo, o XWork deve permanecer fechado em todos os computadores.
+   * Tempo estimado da manutenção: 45 minutos.
+
+---

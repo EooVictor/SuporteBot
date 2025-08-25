@@ -1,0 +1,983 @@
+---
+
+# Integração Studio com SEAT LCD Display – Sistema de Senhas
+
+**Tratativa (Passo a Passo):**
+
+### Configuração no Studio
+
+1. Abra o arquivo de configuração localizado em:
+   C:\Radiocef Studio 2\Studio\Work\LocalConfig\config.ini
+
+2. Adicione a seguinte seção no arquivo:
+   \[LCDdisplay]
+   pasta=\servidor\seat\TVExperience
+   painel=30
+   num\_serie=1
+   guiche=1
+   tipo\_guiche=3
+   fila=Panorâmica
+
+3. Descrição dos parâmetros:
+
+* pasta: Caminho da pasta compartilhada do sistema de senhas.
+* painel: Número do painel que será utilizado.
+* num\_serie: Número que define a versão ou tipo do software.
+* guiche: Número da sala para onde o paciente será direcionado.
+* tipo\_guiche: Tipo de local que será exibido no painel (ex.: 3 = Sala).
+  Valores possíveis:
+  0 = Guichê
+  1 = Mesa
+  2 = Box
+  3 = Sala
+  4 = Consultório
+  5 = Caixa
+  6 = Laboratório
+  7 = Espaço
+  8 = Vaga
+* fila: Tipo de exame que será exibido no painel.
+
+---
+
+### Funcionamento do Sistema
+
+Ao realizar uma captura no Studio, o sistema SEAT LCD Display irá exibir no painel a senha correspondente ao paciente, informando:
+
+* O número do painel.
+* O nome do exame (ex.: Panorâmica).
+* O número da sala ou local configurado.
+
+Isso facilita o direcionamento dos pacientes para as salas corretas durante os atendimentos.
+
+---
+
+**Observações:**
+
+* A configuração deve ser feita em cada máquina de captura individualmente.
+* Verifique se a pasta \servidor\seat\TVExperience está corretamente compartilhada na rede.
+
+---
+
+**Identificadores:**
+integração, studio, seat lcd display, sistema de senhas, painel, config.ini
+
+---
+
+Integração DURR VistaSoft
+
+Essa integração está atualmente funcionando na versão 14.70, certifique-se que o Studio está atualizado antes de iniciar a integração. Quando clicar em “captura” no Studio o paciente é enviado via arquivo de integração para o VistaSoft, e será exibido na tela. Após imagens capturadas, selecione o botão de exportar, escolha o perfil RadioMemory e as imagens serão enviadas. Fechar o VistaSoft e clicar em OK no Studio.
+
+### Tratativa (Passo a Passo):
+
+1. Configure o Studio para abrir o VistaSoft.
+
+   * No canto superior esquerdo vá em: **Arquivo > Configurações > Aparelhos > RX Dig. Gen.**
+
+2. Insira as configurações:
+
+   * Programa de captura: `C:\Program Files (x86)\Duerr\Vistaoft\BinariesCore\Vistasoft.exe` (confirme este caminho, é o executável do VistaSoft, pode variar de acordo com o local de instalação).
+   * Pasta de captura: `C:\Radiocef Studio 2\Integracao DURR` (a pasta já criada no diretório raiz da pasta Radiocef Studio 2).
+   * Nome da imagem: deixe em branco.
+   * Formato: **.JPG**
+   * Dados do paciente: `C:\Radiocef Studio 2\Studio\integracao\patdata.txt`.
+   * Marque as opções conforme indicado.
+
+3. Salve e feche o Studio.
+
+4. Abra o arquivo: `C:\Radiocef Studio 2\Studio\Work\LocalConfig\config.ini`.
+
+   * Na tag `[RX]`, insira uma linha ao final com o texto: `SepData=`, conforme a imagem.
+
+5. Abra o Studio novamente.
+
+6. Após ser iniciado, abra uma documentação, clique em **captura** com botão direito do mouse, selecione **RX Digital**, clique com botão direito novamente e depois **salvar escolha**.
+
+   * Essa opção ficará salva como a última escolha setada.
+
+7. Clique em **captura** novamente, agora com botão esquerdo do mouse. Se tudo estiver certo, o VistaSoft será iniciado.
+
+8. Dentro do VistaSoft, acesse:
+
+   * **Configurações > Engrenagem > Interfaces > Importação do paciente** e configure o caminho do **Patdata**.
+   * Ainda em **Interfaces**, vá em **Modos de Exportação de Imagens** e configure o local da pasta de captura.
+
+9. Em **Modos de Exportação de Imagens**:
+
+   * Nome: **Radio Memory**
+   * Caminho do arquivo: `C:\Radiocef Studio 2\Integracao DURR`
+   * Formato de radiografia 2D: **JPEG** (lembrar que o Studio recebe apenas imagens em 2D).
+   * Selecione a opção **Autoexportação**.
+   * Para sair, clique na seta superior direita.
+
+10. Feche as configurações e capture pelo Studio.
+
+11. Uma vez capturadas, selecione o botão **Exportar**, escolha a opção **Radio Memory** e as imagens serão exportadas.
+
+12. Feche o VistaSoft e clique em **OK** dentro do Studio.
+
+---
+
+### Observações:
+
+* Certifique-se de que a versão do Studio é a 14.70 ou superior.
+* Sempre configure o caminho correto da pasta de integração.
+* O Studio aceita apenas imagens 2D em **JPEG**.
+
+### Identificadores:
+
+* Integração DURR VistaSoft
+* RX Digital
+* Config.ini
+* Patdata.txt
+* Autoexportação
+
+----
+
+## Integração XWork com Romexis
+
+**Tratativa (Passo a Passo):**
+
+### Configurando o Doppel
+
+* O **Doppel** precisa rodar **obrigatoriamente no servidor do Romexis**.
+* Faça o download do integrador **RMDoppel**.
+* Instale o integrador:
+
+  1. Execute o instalador do link.
+  2. Avance até que o config seja aberto.
+  3. Procure a tag `[Romexis]`.
+  4. Insira o Nome ou IP do servidor em `SERVER`.
+  5. Procure a tag `[RCfStudio]` e remova o nome do Server se houver algo após o `=`.
+  6. Feche o config e finalize a instalação.
+
+### Configurando o XWork
+
+1. No XWork, vá em: **Arquivo > Preferências > Outros**.
+
+2. Marque a opção:
+
+   * "Criar arquivo texto com dados do cliente sempre que incluir um novo pedido".
+
+3. Em seguida marque também:
+
+   * "Substituir código interno do cliente pelo número do pedido".
+
+4. Copie o caminho de compartilhamento da pasta de integração do Doppel.
+
+   * Exemplo: na máquina do Romexis, onde o Doppel foi instalado, vá até:
+     `C:\Radiocef Studio 2\Studio\integracao`.
+   * Clique com botão direito na pasta, vá em **Propriedades > Compartilhamento** e copie o caminho de rede.
+
+5. No XWork, cole o caminho copiado em:
+
+   * "Path para gravação do arquivo (patdata.txt)".
+
+Exemplo de caminho:
+
+```
+\\SERVIDOR\Integracao
+```
+
+---
+
+**Observação:**
+Após configurado, a integração irá inserir cadastros de pacientes no banco de dados do Romexis para todos os clientes cadastrados no XWork.
+
+---
+
+**Identificadores:**
+
+* integração XWork
+* Romexis
+* Doppel
+* patdata.txt
+* cadastro de pacientes
+
+----
+
+## Integração Studio com Romexis
+
+**Tratativa (Passo a Passo):**
+
+1. Instale o **Doppel** obrigatoriamente na máquina que for o **servidor do Romexis**.
+   Os arquivos do Doppel serão copiados/instalados para a pasta:
+   `C:\Radiocef Studio 2\Integrador`
+
+2. Configure o **caminho do banco de dados do Studio**.
+   Exemplo:
+   `C:\Radiocef Studio 2\Data\Portugues\RADIOCEFSTUDIO.FDB`
+
+3. Configure também o **servidor do Romexis**.
+   Utilize o **nome da máquina** que hospeda o Romexis (ou o IP, caso seja fixo).
+
+4. Confirme se a máquina realmente é o servidor do Romexis:
+
+   * Clique com o botão direito no atalho do executável do Romexis e escolha **Abrir local do arquivo**.
+   * Localize o arquivo de inicialização do Romexis (.bat), clique com o botão direito em **Editar** e procure pela linha contendo **Host**.
+   * O valor mostrado será o caminho de rede utilizado pelo servidor do Romexis.
+
+5. Crie no **servidor do Studio** uma pasta chamada **Integracao**.
+   Depois, configure o caminho de rede dessa pasta como **PathFiles**, que será utilizado pelo Studio para gerar os arquivos de integração.
+   Exemplo:
+   `\\servidor\Radiocef Studio 2\Studio\Integracao`
+
+6. Ajuste o Studio para utilizar o banco de dados correto, mantendo o mesmo caminho definido acima.
+
+7. No Studio, configure a integração com a pasta criada no servidor:
+
+   * Habilite a integração com o valor **PatData=1**.
+   * Defina o caminho da pasta criada:
+     `\\servidor\Radiocef Studio 2\Studio\Integracao`
+
+8. Concluído o processo, todos os pacientes cadastrados no Studio irão gerar arquivos dentro dessa pasta, e o **Doppel**, instalado no servidor do Romexis, fará a leitura automática, inserindo os dados no Romexis.
+
+---
+
+**Observações:**
+
+* Apenas pacientes criados **após a integração** serão enviados ao Romexis.
+* Normalmente o servidor do Romexis possui as pastas: `romexis`, `romexis_cache`, `romexis_ergodata`, `romexis_images`.
+* Guarde todos os caminhos configurados, pois eles serão necessários em futuras manutenções.
+
+**Identificadores:**
+romexis, integração, doppel, servidor romexis, servidor studio, pathfiles, pacientes
+
+-----
+
+### Integração Sr. Odonto
+
+**Tratativa (Passo a Passo):**
+
+1. Baixe a versão mais atual do **RmDoppel** (consultar link oficial).
+   A instalação pode ser feita em qualquer máquina, mas como padrão instale no **servidor do Studio**.
+
+2. Os arquivos do Doppel devem ser copiados/instalados na pasta:
+   `C:\Radiocef Studio 2\Integrador`
+
+3. Abra o arquivo `Config.ini` que está dentro da pasta do integrador e configure:
+
+   * Na seção **\[RCefStudio]**, edite a linha `Server=` colocando o nome ou IP do servidor que hospeda o banco do Studio.
+   * Ainda em **\[RCefStudio]**, configure `PathDb=` com o caminho do banco do Studio.
+   * Na seção **\[Configuracoes]**, configure `PathFiles=` apontando para a pasta de integração, por exemplo:
+     `\\nomedoservidor\Radiocef Studio 2\Studio\Integracao`
+
+4. Compartilhe a pasta `C:\Radiocef Studio 2\Studio\Integracao` na rede com permissões de leitura e escrita.
+
+5. No **Sr. Odonto**, abra o arquivo de configuração localizado em:
+   `C:\SOFT-ROM\SR-ODONTO\sr.ini`
+   Esse passo precisa ser feito **em todas as máquinas**.
+
+6. No `sr.ini`, configure o campo **Caminho\_Laudo=** com o mesmo caminho definido em `PathFiles=` do Doppel, por exemplo:
+   `\\nomedoservidor\Radiocef Studio 2\Studio\Integracao`
+
+7. Após configurar, basta gerar o arquivo de paciente no Sr. Odonto.
+   O sistema criará o arquivo na pasta configurada e o Doppel fará a leitura automática, cadastrando no Studio.
+
+---
+
+**Observações:**
+
+* O `.ini` do Sr. Odonto precisa ser configurado em **todas as estações**.
+* O banco do Studio deve estar corretamente mapeado no Doppel.
+
+**Identificadores:**
+sr odonto, doppel, integração, radiocef, config.ini, pathfiles, cadastro paciente
+
+----
+
+### Integração Studio com EZDent-I (Vatech)
+
+**Tratativa (Passo a Passo):**
+
+1. Acesse o arquivo `RcefStudio2.ini` na pasta do Studio do servidor e insira em `[painel]`:
+
+   ```
+   Vatech=1
+   Vatechmode=1
+   FastInterfacing=0
+   Autolevel Fotos=Todas
+   ```
+
+2. No computador que executa o Vatech, renomeie a pasta `C:\VCaptureSW\ImageOutput\CR` para algo como `C:\VCaptureSW\ImageOutput\CR - (Data atual)`.
+
+   * Nunca delete a pasta, apenas renomeie.
+   * Caso exista a pasta `ImageBackup`, valide antes de prosseguir.
+   * Crie também as pastas `Pano` e `Ceph` dentro de `ImageBackup` caso necessário.
+
+3. No Studio, vá em: **Arquivo > Configurações > Aparelhos > Vatech** e configure:
+
+   * **Programa de Captura:** caminho do executável `VCaptureSW.exe` (ex.: `C:\VCaptureSW\Exe\VCaptureSW.exe`).
+   * **Pasta de Captura:** caminho da pasta `ImageOutput\CR` (ex.: `C:\VCaptureSW\ImageOutput\CR\`).
+   * **Dados do Paciente:** caminho do arquivo `PatientInfo.ini` (ex.: `C:\VCaptureSW\Exe\PatientInfo.ini`).
+   * **Nome da Imagem:** `*.bmp`.
+   * **Mensagem de Captura:** deixar em branco.
+
+4. Salve as configurações no Studio.
+
+---
+
+**Observações:**
+
+* Os caminhos podem variar de acordo com a instalação do Vatech, valide antes de aplicar.
+* Esta integração utiliza apenas a interface de captura do Vatech, não realiza cadastro de pacientes.
+
+---
+
+**Identificadores:**
+integração, Studio, EZDent-I, Vatech, captura de imagens, configuração
+
+----
+
+## Integração Studio com CareStream
+
+**Tratativa (Passo a Passo):**
+
+### Configuração no Studio
+
+1. Acesse o Studio e vá até **Arquivo > Configurações > Aparelhos > CareStream**.
+2. Em **Caminho de execução**, informe a pasta onde está localizado o `tw.exe`, sem incluir o nome do executável. Geralmente, o caminho é:
+   C:\Program Files\Carestream\Dental Imaging Software
+   ou
+   C:\Program Files (x86)\Carestream\CSImaging
+3. Dentro da pasta C:\Radio Studio 2, crie uma pasta chamada **carestream** e, dentro dela, outra pasta chamada **JPG**.
+4. No campo **Caminho raiz das imagens**, informe o caminho da pasta **carestream**.
+5. No campo **Caminho das imagens**, informe o caminho da pasta **JPG**.
+
+### Configurando a Captura
+
+1. Salve as configurações e abra uma documentação.
+2. Clique com o botão direito sobre **Captura** e selecione **CareStream**.
+3. Clique novamente com o botão direito em **Captura** e selecione **Salvar escolha**.
+4. Agora, clique com o botão esquerdo para abrir a interface de captura.
+
+### Configuração no CareStream
+
+1. Com a interface do CareStream aberta, acesse **Opções > Preferências**.
+2. Na aba **Guardar**, marque a última opção **Guardar automaticamente uma cópia das imagens num formato de ficheiro aberto** e selecione **JPEG**.
+
+**Observações:**
+
+* A integração ocorre de forma direta, sem armazenar dados no banco do CareStream, apenas utilizando sua interface de captura.
+
+**Identificadores:**
+carestream, cs image, kodak, trophy, integração, studio, captura
+
+-------
+
+## Integração Studio com Cliniview 10
+
+**Tratativa (Passo a Passo):**
+
+### Configuração do Doppel
+
+1. Baixe e execute o instalador do RMDoppel.
+2. Prossiga com a instalação até que a tela de configuração seja aberta.
+3. Localize a seção \[Cliniview] no arquivo de configuração.
+4. Insira o nome ou IP do servidor no campo SERVER.
+
+**Identificando o Servidor do Cliniview:**
+
+1. Abra o Cliniview e acesse **Help (Ajuda) → About System (Sobre o Sistema)**.
+2. Na aba **Geral**, se a máquina for o servidor, o campo “Database” mostrará apenas o caminho do banco de dados.
+3. Se for uma estação, o caminho incluirá um @ seguido do nome do servidor.
+
+### Configuração no Studio
+
+1. Acesse **Arquivo → Configurações → Aparelhos → RX Dig. Gen** no Studio.
+2. No campo **Programa de captura**, informe o local do executável do Cliniview (cliniview\.exe).
+   Exemplo: C:\Program Files (x86)\Cliniview\cliniview\.exe
+3. Crie a pasta **Integração Cliniview** em C:\Radiocef Studio 2.
+4. Deixe o campo **Nome da imagem** em branco.
+5. Selecione o formato **.JPG** ou o mesmo formato configurado para exportação no Cliniview.
+6. No campo **Dados do Paciente**, informe o caminho da pasta **Integração** localizada em C:\Radiocef Studio 2\Studio.
+
+   * Caso haja mais de uma estação utilizando a integração, utilize um caminho compartilhado.
+
+### Captura de Imagens
+
+1. Salve as configurações e abra uma documentação.
+2. Clique com o botão direito sobre **Captura** e selecione **RX Digital**.
+3. Clique novamente com o botão direito em **Captura** e selecione **Salvar escolha**.
+4. Clique com o botão esquerdo para abrir a interface de captura.
+5. Após abrir o Cliniview, pesquise o paciente pelo **NOME** ou **NÚMERO DE PEDIDO**.
+
+### Configuração do Cliniview 10
+
+1. Acesse **Ferramentas → Configurações** ou **Tools → Settings**.
+2. Na aba **Quick Export (Exportação Rápida)**, defina o caminho da pasta **Integração Cliniview**.
+3. Desative a opção **Criar nova subpasta para cada paciente**.
+4. Em **Export Type (Tipo de Exportação)**, selecione **Entire Image (Imagem Inteira)**.
+5. Escolha o formato de exportação compatível (**JPEG - JFIF compliant**).
+6. Em **Delete exported image file automatically (Excluir automaticamente imagens exportadas)**, selecione **Ao iniciar a aplicação**.
+
+**Atenção:**
+
+* Configure a captura de imagens conforme a necessidade do cliente.
+* Se aplicar filtros, ative **Salvar automaticamente e fechar o modelo totalmente preenchido**.
+* Se não aplicar, marque **Salvar automaticamente as imagens após a sessão de captura**.
+* **Apenas uma dessas opções deve ser ativada.**
+
+**Observações:**
+
+* O RMDoppel deve ser instalado apenas no servidor do Cliniview.
+* O Cliniview deve estar configurado para executar como Administrador.
+
+**Identificadores:**
+cliniview, integração, rx digital, rmdoppel, studio, captura, versão 10
+
+---
+
+
+## Integração Studio com Cliniview 11
+
+**Tratativa (Passo a Passo):**
+
+### Identificando o Servidor do Cliniview
+
+1. Abra o Cliniview e acesse **Help (Ajuda) → System Information (Informações de sistema)**.
+2. Na aba **Geral**, se a máquina for o servidor, o campo “Database” mostrará apenas o caminho do banco de dados.
+3. Se for uma estação, o caminho incluirá um **@** seguido do nome do servidor.
+
+### Configuração no Studio
+
+1. Acesse o Studio em **Arquivo → Configurações → Aparelhos → Instrumentarium**.
+2. Em **Servidor do Cliniview**, preencha com o caminho da pasta **ProgramData** do Cliniview.
+   Exemplo: C:\ProgramData\Cliniview
+3. No campo **Caminho do Cliniview**, informe o local do executável do Cliniview (cliniview\.exe).
+   Exemplo: C:\Program Files (x86)\Cliniview\cliniview\.exe
+4. Crie a pasta **Integração Cliniview** em C:\Radiocef Studio 2.
+5. Marque todas as check-box disponíveis.
+
+### Captura de Imagens
+
+1. Salve as configurações e abra uma documentação.
+2. Clique com o botão direito sobre **Captura** e selecione **Instrumentarium**.
+3. Clique novamente com o botão direito em **Captura** e selecione **Salvar escolha**.
+4. Agora, clique com o botão esquerdo para abrir a interface de captura.
+5. Após o Cliniview ser aberto, os dados do paciente já devem aparecer.
+
+### Configuração do Cliniview 11
+
+1. Acesse **Ferramentas → Configurações** ou **Tools → Settings**.
+2. Na aba **Quick Export (Exportação Rápida)**, defina o caminho da pasta **Integração Cliniview**.
+3. Desative a opção **Criar nova subpasta para cada paciente**.
+4. Em **Export Type (Tipo de Exportação)**, selecione **Entire Image (Imagem Inteira)**.
+5. Escolha o formato de exportação compatível (**JPEG - JFIF compliant**).
+6. Em **Delete exported image file automatically (Excluir automaticamente imagens exportadas)**, selecione **Ao iniciar a aplicação**.
+
+**Atenção:**
+
+* Configure a captura de imagens conforme a necessidade do cliente.
+* Se aplicar filtros, ative **Salvar automaticamente e fechar o modelo totalmente preenchido**.
+* Se não aplicar, marque **Salvar automaticamente as imagens após a sessão de captura**.
+* **Apenas uma dessas opções deve ser ativada.**
+
+**Observações:**
+
+* Sempre verifique se a versão do Studio está atualizada.
+* O Cliniview deve ser configurado para executar como Administrador.
+
+**Identificadores:**
+cliniview, integração, instrumentarium, studio, captura, versão 11
+
+---
+
+## Integração Studio com Digora - Soredex
+
+**Tratativa (Passo a Passo):**
+
+### Configuração do Doppel
+
+1. Baixe e execute o instalador do RMDoppel.
+2. Prossiga com a instalação até que a tela de configuração seja aberta.
+3. Localize a seção \[DIGORA] no arquivo de configuração.
+4. Insira o caminho do banco de dados copiado em **PathDB**.
+
+**Identificando banco de dados do Digora:**
+
+1. Abra o Scanora e acesse **File → Database → Properties**.
+2. Copie o caminho presente em **Database file** e cole na tag \[DIGORA] em **PathDB** no arquivo de configuração do Doppel.
+
+### Configuração no Studio
+
+1. Acesse **Arquivo → Configurações → Aparelhos → RX Dig. Gen** no Studio.
+2. Preencha os campos:
+
+   * **Programa de Captura:** C:\Program Files (x86)\Soredex\DfW\2.6\Digora.exe
+   * **Pasta de Captura:** C:\Radiocef Studio 2\Digora Imagens
+   * **Nome da Imagem:** (Deixe em branco)
+   * **Formato:** \*.bmp (ou o mesmo formato configurado na exportação do Digora)
+   * **Dados do Paciente:** C:\Radiocef Studio 2\Studio\Integracao\patdata.txt
+3. Marque as opções:
+
+   * Importa todas as imagens da pasta
+   * Apaga as imagens depois de importadas
+   * Apaga as imagens ao abrir a rotina
+
+### Captura de Imagem
+
+1. Com uma documentação aberta no Studio, clique com o botão direito em **Captura** e selecione **RX Digital**.
+2. Clique novamente com o botão direito em **Captura** e selecione **Salvar Escolha**.
+3. Clique com o botão esquerdo sobre **Captura** para abrir a interface.
+4. O Digora será aberto automaticamente.
+5. No Digora:
+
+   * Acesse **Patient List** e depois **Show**.
+   * Pesquise e selecione o paciente cadastrado.
+   * Realize a captura das imagens.
+   * Quando a imagem for exibida, pressione **F12** no teclado.
+   * Selecione a pasta configurada na captura (C:\Radiocef Studio 2\Digora Imagens).
+   * Confirme que o formato de exportação no Digora é o mesmo configurado no Studio e clique em **Salvar**.
+6. Feche o Digora.
+7. A imagem será automaticamente importada para o Studio.
+
+**Observações:**
+
+* Confirme sempre se o formato de exportação no Digora é o mesmo configurado no Studio para garantir a importação correta.
+
+**Identificadores:**
+digora, soredex, integração, studio, captura, rmdoppel
+
+---
+
+## Integração Studio com DBSWIN - Dürr
+
+**Tratativa (Passo a Passo):**
+
+### Configuração no Studio
+
+1. Acesse **Arquivo → Configurações → Aparelhos → RX Dig. Gen** no Studio.
+2. No campo **Programa de captura**, informe o local do executável do DBSWIN (DBSWIN.exe).
+   Exemplo: C:\Program Files (x86)\Duerr\DBSWIN\Bin\DBSWIN.exe
+3. Crie a pasta **Integração DURR** em C:\Radio Studio 2.
+4. Deixe o campo **Nome da imagem** em branco.
+5. Selecione o formato **.JPG**.
+6. No campo **Dados do Paciente**, informe o caminho da pasta **Integração**, localizada em C:\Radiocef Studio 2\Studio.
+
+   * Caso haja mais de uma estação utilizando a integração, use um caminho compartilhado.
+     Exemplo: C:\Radiocef Studio 2\Studio\Integracao\patdata.txt
+7. Marque as opções:
+
+   * Importa todas as imagens da pasta
+   * Apaga as imagens depois de importadas
+   * Apaga as imagens ao abrir a rotina
+8. Salve e deixe o Studio fechado.
+9. Abra o arquivo: C:\Radiocef Studio 2\Studio\Work\LocalConfig\config.ini
+10. Na tag \[Rx] insira uma linha ao final com o texto **SepData=**.
+
+### Captura de Imagens
+
+1. Salve as configurações e abra uma documentação.
+2. Clique com o botão direito sobre **Captura** e selecione **RX Digital**.
+3. Clique novamente com o botão direito em **Captura** e selecione **Salvar escolha**.
+4. Clique com o botão esquerdo para abrir a interface de captura.
+
+### Configuração do DBSWIN
+
+1. Dentro do DBSWIN, clique em **Opções → Visualizar configurações**.
+2. Clique no ícone de engrenagem (último na aba Config).
+3. Clique em **Paciente → Importar doente** e configure o mesmo caminho definido no Studio em **Dados do Paciente**.
+   Exemplo: C:\Radiocef Studio 2\Studio\Integracao\patdata.txt
+4. Aplique e salve.
+5. Clique em **Visualizador → Export/Email → Opções de exportação**.
+6. Selecione **Autoexport** em Modo e, em **Exportar Caminho**, configure o mesmo caminho definido no Studio para imagens.
+   Exemplo: C:\Radiocef Studio 2\Imagens Durr
+7. Desmarque a opção **Guardar para o subdirectorio = numero do cartão**.
+8. Clique em **OK**.
+9. Clique em **Radiografia** e marque as opções:
+
+   * Abrir automaticamente o software de tratamento de imagem
+   * Exportar imagens automaticamente
+
+### Sequência correta para uso da integração
+
+1. Cadastrar o paciente no Studio.
+2. Abrir o cadastro do paciente.
+3. Clicar em captura.
+4. O DBSWIN será aberto já com o paciente cadastrado e selecionado.
+5. Realizar a captura das imagens.
+6. Fechar o DBSWIN.
+7. As imagens serão inseridas automaticamente no Studio.
+
+**Observações:**
+
+* Sempre confirmar caminhos iguais entre Studio e DBSWIN.
+* O Studio deve estar atualizado e configurado corretamente antes da integração.
+
+**Identificadores:**
+dürr, dbswin, integração, studio, rx digital, captura
+
+---
+
+
+## Integração Studio com Viewbox - Dürr
+
+**Tratativa (Passo a Passo):**
+
+### Configuração no Studio
+
+1. Acesse **Arquivo → Configurações → Aparelhos → RX Dig. Gen** no Studio.
+2. No campo **Programa de Captura**, informe o local do executável do Viewbox (Viewbox Studio.exe).
+   Exemplo: C:\Program Files\Viewbox Software\Viewbox Studio\Viewbox Studio.exe
+3. Crie a pasta **Integração Viewbox** em C:\Radiocef Studio 2.
+4. Deixe o campo **Nome da imagem** em branco.
+5. Selecione o formato **.JPG**.
+6. No campo **Dados do Paciente**, informe o caminho da pasta de integração:
+   C:\Radiocef Studio 2\Studio\Integracao\patdata.txt
+
+   * Caso utilize mais de uma estação, utilize um diretório compartilhado.
+7. Marque as opções:
+
+   * Importa todas as imagens da pasta
+   * Apaga as imagens depois de importadas
+   * Apaga as imagens ao abrir a rotina
+
+### Captura de Imagens
+
+1. Salve as configurações e abra uma documentação.
+2. Clique com o botão direito sobre **Captura** e selecione **RX Digital**.
+3. Clique novamente com o botão direito em **Captura** e selecione **Salvar escolha**.
+4. Clique com o botão esquerdo para abrir a interface de captura.
+
+### Configuração do Viewbox
+
+1. Abra o Viewbox e acesse as configurações do sistema.
+2. Acesse a aba **Integração** e configure o campo **Exportar imagens para** com o diretório criado:
+   C:\Radiocef Studio 2\Integracao Viewbox
+3. Desmarque a opção **Criar pasta do paciente ao exportar imagens**.
+4. Configure o campo **Importar pacientes de** para o diretório local (servidor ou estação de trabalho):
+   C:\Radiocef Studio 2\Studio\Integracao\\
+
+### Sequência correta para uso da integração
+
+1. O **Viewbox deve estar aberto antes de iniciar a integração**.
+2. Cadastrar o paciente no Studio.
+3. Abrir o cadastro do paciente.
+4. Clicar em **Captura**.
+5. O Viewbox será iniciado automaticamente.
+6. No Viewbox, clique no ícone de pesquisa e selecione o paciente.
+7. Realize a captura das imagens.
+8. Feche o Viewbox.
+9. As imagens serão automaticamente inseridas no Studio.
+
+**Observações:**
+
+* O Viewbox deve permanecer sempre aberto na máquina em que a integração será utilizada.
+
+**Identificadores:**
+viewbox, integração, durr, studio, rx digital, captura
+
+---
+
+## Integração Studio com IDixel - JMorita
+
+**Tratativa (Passo a Passo):**
+
+### Verificação Inicial
+
+1. Verifique se as pastas **ToIViewSvr** e **ToIView** existem em C:\JMoritaMFG, contendo os executáveis:
+
+   * C:\JMoritaMFG\ToIViewSvr\ToIViewsrv.exe
+   * C:\JMoritaMFG\ToIView\ToIView\.exe
+2. Caso não possua essas pastas, solicite a instalação junto ao suporte da JMorita.
+
+### Configuração no Studio
+
+1. No Studio, acesse **Arquivo → Configurações → Aparelhos → J Morita** e preencha:
+
+   * **Caminho do ToIView:** C:\JMoritaMFG\ToIView\ToIView\.exe
+   * **Executável (IDixel):** C:\Program Files (x86)\JMorita\I-View-SS3\idx.exe
+   * **Pasta de exportação:** C:\Export
+2. Marque as opções:
+
+   * Inserir novo paciente no banco de dados do ToIView
+   * Executar o JMorita para capturar imagens
+   * Apagar as imagens depois de importadas
+
+### Captura de Imagens
+
+1. Salve as configurações e abra uma documentação.
+2. Clique com o botão direito sobre **Captura** e selecione **J Morita**.
+3. Clique novamente com o botão direito em **Captura** e selecione **Salvar escolha**.
+4. Clique com o botão esquerdo para abrir a interface de captura.
+
+**Atenção:**
+
+* Instrua o cliente para **não clicar em “OK”** na mensagem de “Confirmação de retorno ao Studio” antes do IDixel abrir. É necessário aguardar a interface carregar completamente.
+
+### Configuração do JMorita
+
+1. Abra o arquivo **ToIView\.ini** em C:\JMoritaMFG\ToIView\ToIView\.ini.
+2. No parâmetro **bUsePatientCardOpen**, configure o valor para 1.
+
+   * bUsePatientCardOpen=1
+
+### Exportação das Imagens
+
+1. Após capturar as imagens, clique em **Save as File** dentro do IDixel.
+2. Selecione a primeira opção **Save as File**.
+3. Feche o IDixel.
+4. Clique na mensagem de “Confirmação de retorno ao Studio” e aguarde a importação das imagens para o Studio.
+
+**Observações:**
+
+* As imagens devem ser exportadas manualmente para a pasta configurada previamente.
+* Após confirmar no Studio, as imagens serão importadas automaticamente.
+
+**Identificadores:**
+jmorita, idixel, integração, studio, rx digital, captura
+
+----
+
+## Integração Studio com NewTom
+
+**Tratativa (Passo a Passo):**
+
+### Configuração no Studio
+
+1. Atualize o Studio para a versão mais recente disponível.
+2. No Studio, acesse **Arquivo → Configurações → Aparelhos → NewTom**.
+3. Preencha os seguintes campos:
+
+   * **NNT Bridge:** C:\NNT (confirme o caminho, pode variar conforme a instalação).
+   * **Pasta de Imagens:** C:\Radiocef Studio 2\Studio\Imagens NewTom
+4. Crie a pasta **Imagens NewTom** no caminho acima, caso ela não exista.
+5. Crie um **atalho dessa pasta na área de trabalho** para facilitar a localização das imagens.
+
+### Captura de Imagem
+
+1. Clique com o botão direito sobre **Captura** e selecione **NewTom**.
+2. Clique novamente com o botão direito em **Captura** e selecione **Salvar escolha**.
+3. Agora, clique com o botão esquerdo para abrir a interface de captura.
+4. O NewTom será aberto já com o paciente selecionado para captura.
+5. Oriente o cliente que deve salvar **apenas imagens 2D** na pasta configurada.
+
+   * As imagens de tomografia (3D) devem continuar sendo salvas no local habitual.
+6. Após a captura da imagem:
+
+   * Selecione o tipo de arquivo **JPEG**.
+   * Salve a imagem na pasta criada (atalho na área de trabalho).
+7. Feche o NewTom.
+8. As imagens serão automaticamente importadas para o Studio.
+
+**Observações:**
+
+* Apenas imagens 2D devem ser exportadas para o Studio por meio desta integração.
+* Tomografias (3D) devem ser armazenadas na pasta padrão já utilizada pelo cliente.
+
+**Identificadores:**
+newtom, integração, nnt bridge, studio, captura, imagens 2d
+
+---
+
+## Integração Studio com Scanora
+
+**Tratativa (Passo a Passo):**
+
+### Identificando o Servidor do Scanora
+
+1. Abra o Scanora e acesse **Help (Ajuda) → System information (Informações de sistema)**.
+2. Na aba **Geral**, se a máquina for o servidor, o campo “Database” mostrará apenas o caminho do banco de dados.
+3. Se for uma estação, o caminho incluirá um **@** seguido do nome do servidor.
+
+### Configuração no Studio
+
+1. Acesse o Studio em **Arquivo → Configurações → Aparelhos → Scanora**.
+2. No campo **Programa de captura**, insira o caminho do executável do Scanora.
+   Exemplo: C:\Program Files (x86)\Scanora\Scanora.exe
+3. No campo **Pasta de captura**, informe o local de exportação de imagens:
+   C:\Radiocef Studio 2\Integracao Scanora
+4. Formato: **.JPG**
+5. No campo **Dados do paciente**, informe o local onde foi instalado o RMDoppel (local ou servidor do Scanora).
+   Exemplo: C:\Radiocef Studio 2\Studio\Integracao\patdata.txt
+6. Marque todas as opções (check-box) e selecione o formato de dados **Linear**.
+
+### Captura de Imagens
+
+1. Salve as configurações e abra uma documentação.
+2. Clique com o botão direito sobre **Captura** e selecione **Scanora**.
+3. Clique novamente com o botão direito em **Captura** e selecione **Salvar escolha**.
+4. Clique com o botão esquerdo para abrir a interface de captura.
+5. Após abrir o Scanora, os dados do paciente já devem aparecer.
+
+### Configuração do Scanora
+
+1. Acesse **Ferramentas → Configurações** ou **Tools → Settings**.
+2. Na aba **Quick Export (Exportação Rápida)**, defina o caminho da pasta **Integração Scanora**.
+3. Desative a opção **Criar nova subpasta para cada paciente**.
+4. Em **Export Type (Tipo de Exportação)**, selecione **Entire Image (Imagem Inteira)**.
+5. Escolha o formato de exportação compatível (**JPEG - JFIF compliant**).
+6. Em **Delete exported image file automatically (Excluir automaticamente imagens exportadas)**, selecione **Ao iniciar a aplicação**.
+
+**Atenção:**
+
+* Configure a captura de imagens conforme a necessidade do cliente.
+* Se aplicar filtros, ative **Salvar automaticamente e fechar o modelo totalmente preenchido**.
+* Se não aplicar, marque **Salvar automaticamente as imagens após a sessão de captura**.
+* Apenas **uma** dessas opções deve ser ativada.
+
+**Identificadores:**
+scanora, integração, rmdoppel, studio, rx digital, captura
+
+---
+
+## Integração Studio com Sidexis 4
+
+**Tratativa (Passo a Passo):**
+
+### 1. Atualização do Studio
+
+* Atualize o Studio para a última versão disponível.
+* Crie a pasta **Sirona** dentro da pasta **LocalConfig** no diretório do Studio.
+  Caminho: `C:\Radiocef Studio 2\Studio\Work\LocalConfig\Sirona`
+* Dentro dessa pasta, crie o arquivo **studio.sdx**.
+
+**Dica:**
+Caso a estação não possua a pasta **LocalConfig**, abra um paciente no Studio, clique com o botão direito em **Captura**, selecione a opção **Sirona** e clique em **Salvar escolha**. A pasta será criada automaticamente.
+
+---
+
+### 2. Configuração do arquivo config.ini
+
+Edite o arquivo **config.ini** adicionando a seguinte configuração:
+
+\[Sidexis]
+writepath=\sirona\PDATA\siomin.sdx
+Program=\sirona\SIDEXIS4\Sidexis4.exe
+AllImages=1
+DeleteImages=1
+
+\[Capture]
+Device=3
+
+* O campo **writepath** deve receber o caminho do banco de dados do Sidexis (pode variar conforme a instalação).
+* O campo **Program** deve apontar para o executável do Sidexis.
+
+**Atenção:**
+Caso a estação não seja o servidor do Sidexis, utilize caminho de rede para o writepath (por exemplo: `\\CaminhoDeRede\PDATA\siomin.sdx`).
+Se o PDATA estiver em outro HD, utilize a letra correspondente, como `D:` ou `E:`.
+
+---
+
+### 3. Configuração da Multi-Estação
+
+* Acesse as configurações do Sidexis.
+* Ative a opção **Multi-Estação**.
+* Marque as opções:
+
+  * "Os pedidos podem ser aceitos aqui"
+  * "Aceitação direta de ordem individual"
+  * "Aceitação automática de pedidos após o cadastro do paciente".
+
+---
+
+### 4. Configuração do Parceiro de Comunicação
+
+* Crie um novo parceiro com o nome **RadioMemory**.
+* No campo de **arquivo de caixa de correio (SLIDA)**, aponte para o arquivo **studio.sdx** criado anteriormente.
+  Caminho: `C:\Radiocef Studio 2\Studio\Work\LocalConfig\Sirona\studio.sdx`
+* Em **Atributos**, marque as opções:
+
+  * Banco de dados do paciente
+  * Intercâmbio de imagens
+  * Recebimento automático de cópias de novas exposições
+* Role até o final da tela e marque também a opção **Apenas imagens 2D**.
+
+---
+
+### 5. Integração concluída
+
+* No Studio, clique em **Captura**.
+* Os dados do paciente serão enviados para o Sidexis, que já estará pronto para as capturas.
+* Após realizar a captura no Sidexis e aplicar filtros, clique no botão de salvar.
+* Não feche o Sidexis. Volte ao Studio e clique em **OK** para que a imagem seja importada corretamente.
+
+**Atenção:**
+Se ocorrer erro, pode ser necessário atualizar o **generator** do banco de dados do Studio para um valor maior do que o presente no Sidexis.
+
+---
+
+## Integração – Studio com Pax 400 (Vatech)
+
+**Descrição**
+Integração do **Studio** com o **Pax 400**, permitindo abrir o software do equipamento já com os dados do paciente. As imagens são exportadas manualmente pelo Pax 400 e importadas automaticamente pelo Studio.
+
+---
+
+**Tratativa (Passo a Passo)**
+
+1. No Studio, acesse: **Arquivo > Configurações > Aparelhos > Pax 400**.
+2. Em **Executável**, informe o caminho do software do Pax 400. Exemplo:
+   `C:\Program Files\Vatech\EzDent\EzDent.exe` *(ou conforme a versão instalada)*.
+3. Crie a pasta:
+   `C:\Radio Studio 2\Pax400\Imagens` *(para exportação de imagens)*.
+4. Configure no Studio:
+
+   * **Pasta de exportação:** `C:\Radio Studio 2\Pax400\Imagens`
+   * **Formato da imagem:** JPG
+   * **Nome da imagem:** deixar em branco
+5. Marque as opções:
+
+   * Importar todas as imagens da pasta
+   * Apagar imagens após importação
+   * Apagar imagens ao abrir a rotina
+6. Clique em **Salvar**.
+7. Abra uma documentação no Studio.
+8. Clique com o botão direito em **Captura > Pax 400** e selecione **Salvar escolha**.
+9. Clique com o botão esquerdo em **Pax 400** para abrir o software do equipamento com os dados do paciente.
+10. Realize a captura normalmente no Pax 400.
+11. Exporte manualmente as imagens para a pasta configurada no Studio (`C:\Radio Studio 2\Pax400\Imagens`).
+12. Feche o software do Pax 400.
+13. As imagens serão importadas automaticamente pelo Studio.
+
+---
+
+**Observações**
+
+* O software do Pax 400 deve exportar no formato **JPG**.
+* A pasta de exportação precisa de permissões de leitura e escrita.
+* Se o paciente não for carregado corretamente, verifique o caminho do executável e o arquivo de integração do Studio.
+
+---
+
+## Integração – Studio com TWAIN
+
+**Descrição**
+Permite ao **Studio** capturar imagens diretamente de equipamentos compatíveis com drivers **TWAIN**, sem necessidade de software adicional.
+
+---
+
+**Tratativa (Passo a Passo)**
+
+1. No Studio, acesse: **Arquivo > Configurações > Aparelhos > TWAIN**.
+2. Deixe o campo **Executável** em branco.
+3. Configure a **Pasta de Exportação** como:
+   `C:\Radio Studio 2\TWAIN Imagens` *(ou outra pasta de preferência)*.
+4. Configure:
+
+   * **Formato da imagem:** JPG
+   * **Nome da imagem:** em branco ou padrão do driver
+5. Marque as opções:
+
+   * Importar todas as imagens da pasta
+   * Apagar imagens após importação
+   * Apagar imagens ao abrir a rotina
+6. Clique em **Salvar**.
+7. Abra uma documentação no Studio.
+8. Clique com o botão direito em **Captura > TWAIN** e selecione **Salvar escolha**.
+9. Clique com o botão esquerdo em **TWAIN** para abrir a interface de captura.
+10. O driver TWAIN do equipamento será carregado.
+11. Realize a captura pela interface do driver.
+12. As imagens serão salvas na pasta configurada.
+13. O Studio detectará e importará automaticamente as imagens.
+
+---
+
+**Observações**
+
+* O driver **TWAIN** deve estar instalado corretamente.
+* A estabilidade da integração depende do driver do fabricante.
+* Caso o driver não seja reconhecido, reinstale ou atualize pelo fabricante.
+* Útil para equipamentos antigos ou genéricos sem integração própria.
+
+---
