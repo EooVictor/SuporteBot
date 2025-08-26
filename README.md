@@ -68,7 +68,7 @@ Toda a base de dados é fornecida ao GPT em formato de **texto estruturado**, pe
 
 ---
 
-## 👨‍💻 Autor
+## 👨‍💻 Autores
 
 **Victor Raphael**
 💼 Técnico de Suporte na [Radio Memory](https://www.radiomemory.com.br/)
@@ -77,5 +77,14 @@ Toda a base de dados é fornecida ao GPT em formato de **texto estruturado**, pe
 
 [![LinkedIn](https://img.shields.io/badge/-Victor_Raphael-0077B5?style=for-the-badge\&logo=linkedin\&logoColor=white)](https://www.linkedin.com/in/dev-victor-raphael)
 [![GitHub](https://img.shields.io/badge/-EooVictor-181717?style=for-the-badge\&logo=github\&logoColor=white)](https://github.com/EooVictor)
+
+**Deywid Souza**
+💼 Técnico de Suporte na [Radio Memory](https://www.radiomemory.com.br/)
+🎓 Ciência da computação - UNA
+🚀 **IA, automação e backend**
+
+[![LinkedIn](https://img.shields.io/badge/-Deywid_Souza-0077B5?style=for-the-badge\&logo=linkedin\&logoColor=white)](https://www.linkedin.com/in/deywid-souza/)
+[![GitHub](https://img.shields.io/badge/-Deywid12-181717?style=for-the-badge\&logo=github\&logoColor=white)](https://github.com/Deywid12)
+
 
 ---
