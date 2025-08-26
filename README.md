@@ -43,7 +43,7 @@ Toda a base de dados é fornecida ao GPT em formato de **texto estruturado**, pe
 ## ⚙️ Como Executar Localmente
 
 1. Instale o **XAMPP** ou outro servidor Apache
-2. Clone este repositório:
+2. Clone este repositório :
 
    ```bash
    git clone https://github.com/seu-usuario/basebot.git
